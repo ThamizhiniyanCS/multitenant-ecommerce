@@ -1,10 +1,12 @@
 import React from 'react'
-import './styles.css'
+
+import { Button } from '@/components/ui/button'
 
 export default async function HomePage() {
   return (
     <div>
       <h1 className="text-red-300">Getting Started the Great</h1>
+      <Button>Helloooo</Button>
     </div>
   )
 }
