@@ -1,7 +1,10 @@
 import React from 'react'
-import './styles.css'
 import { DM_Sans } from 'next/font/google'
+
 import { cn } from '@/lib/utils'
+import { TRPCReactProvider } from '@/trpc/client'
+
+import './styles.css'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -16,7 +19,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={cn('antialiased scroll-smooth', dm_sans.className)}>
-        <main>{children}</main>
+        <main>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </main>
       </body>
     </html>
   )

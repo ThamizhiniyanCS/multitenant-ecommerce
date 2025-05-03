@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import { CategoriesGetManyOutput } from '@/modules/categories/types'
+
 import CategoryDropdown from './category-dropdown'
-import { CustomCategory } from '../types'
 import CategoriesSidebar from './categories-sidebar'
 
 interface Props {
-  data: CustomCategory[]
+  data: CategoriesGetManyOutput
 }
 
 const Categories = ({ data }: Props) => {
@@ -90,7 +91,6 @@ const Categories = ({ data }: Props) => {
 
         <div ref={viewAllRef} className="shrink-0">
           <CategoriesSidebar
-            data={data}
             isAnyHovered={isAnyHovered}
             isActiveCategoryHidden={isActiveCategoryHidden}
           />

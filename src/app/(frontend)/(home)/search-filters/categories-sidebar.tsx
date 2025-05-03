@@ -3,27 +3,31 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronLeftIcon, ChevronRightIcon, ListFilterIcon } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { useTRPC } from '@/trpc/client'
 
-import { CustomCategory } from '../types'
+import { CategoriesGetManyOutput } from '@/modules/categories/types'
 
 interface Props {
   isActiveCategoryHidden?: boolean
   isAnyHovered?: boolean
-  data: CustomCategory[] // TODO: Remove this later
   isMobile?: boolean
 }
 
-const CategoriesSidebar = ({ isAnyHovered, isActiveCategoryHidden, data, isMobile }: Props) => {
+const CategoriesSidebar = ({ isAnyHovered, isActiveCategoryHidden, isMobile }: Props) => {
+  const trpc = useTRPC()
+  const { data } = useQuery(trpc.categories.getMany.queryOptions())
+
   const router = useRouter()
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [parentCategories, setParentCategories] = useState<CustomCategory[] | null>(null)
-  const [selectedCategory, setSelectedCategory] = useState<CustomCategory | null>(null)
+  const [parentCategories, setParentCategories] = useState<CategoriesGetManyOutput | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<CategoriesGetManyOutput[0] | null>(null)
 
   // NOTE: If we have parent categories, show these, otherwise show root categories
   const currentCategories = parentCategories ?? data ?? []
@@ -34,9 +38,9 @@ const CategoriesSidebar = ({ isAnyHovered, isActiveCategoryHidden, data, isMobil
     setIsSidebarOpen(open)
   }
 
-  const handleCategoryClick = (category: CustomCategory) => {
+  const handleCategoryClick = (category: CategoriesGetManyOutput[0]) => {
     if (category.subcategories && category.subcategories.length > 0) {
-      setParentCategories(category.subcategories as CustomCategory[])
+      setParentCategories(category.subcategories as CategoriesGetManyOutput)
       setSelectedCategory(category)
     } else {
       // NOTE: This is a leaf category (no subcategories)
