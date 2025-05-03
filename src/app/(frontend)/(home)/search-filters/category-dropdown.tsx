@@ -1,16 +1,17 @@
 'use client'
 
+import Link from 'next/link'
 import { useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { Category } from '@/payload-types'
-import { useDropdownPosition } from './use-dropdown-position'
 
+import { useDropdownPosition } from './use-dropdown-position'
 import SubcategoryMenu from './subcategory-menu'
+import { CustomCategory } from '../types'
 
 interface Props {
-  category: Category
+  category: CustomCategory
   isActive?: boolean
   isNavigationHovered?: boolean
 }
@@ -40,12 +41,16 @@ const CategoryDropdown = ({ category, isActive, isNavigationHovered }: Props) =>
       <div className="relative">
         <Button
           className={cn(
-            'h-11 px-4 rounded-full bg-white hover:bg-main',
-            isActive && !isNavigationHovered && '',
+            'h-11 px-4 rounded-full bg-white hover:bg-main cursor-pointer',
+            isActive &&
+              !isNavigationHovered &&
+              'bg-main translate-x-reverseBoxShadowX translate-y-reverseBoxShadowY shadow-shadow',
+            isOpen &&
+              'bg-main translate-x-reverseBoxShadowX translate-y-reverseBoxShadowY shadow-shadow',
           )}
           variant="reverse"
         >
-          {category.name}
+          <Link href={`/${category.slug === 'all' ? '' : category.slug}`}>{category.name}</Link>
         </Button>
 
         {category.subcategories && category.subcategories.length > 0 && (
