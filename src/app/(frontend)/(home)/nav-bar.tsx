@@ -66,7 +66,9 @@ const NavBar = () => {
           )}
           variant="noShadow"
         >
-          <Link href="/sign-in">Login</Link>
+          <Link prefetch href="/sign-in">
+            Login
+          </Link>
         </Button>
         <Button
           asChild
@@ -75,7 +77,9 @@ const NavBar = () => {
           )}
           variant="noShadow"
         >
-          <Link href="/sign-up">Start Selling</Link>
+          <Link prefetch href="/sign-up">
+            Start Selling
+          </Link>
         </Button>
       </div>
 

@@ -3,6 +3,7 @@ import { DM_Sans } from 'next/font/google'
 
 import { cn } from '@/lib/utils'
 import { TRPCReactProvider } from '@/trpc/client'
+import { Toaster } from '@/components/ui/sonner'
 
 import './styles.css'
 
@@ -20,7 +21,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body className={cn('antialiased scroll-smooth', dm_sans.className)}>
         <main>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            {children}
+            <Toaster />
+          </TRPCReactProvider>
         </main>
       </body>
     </html>

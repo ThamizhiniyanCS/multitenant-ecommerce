@@ -19,7 +19,7 @@ const Categories = ({ data }: Props) => {
   const [visibleCount, setVisibleCount] = useState(data.length)
   const [isAnyHovered, setIsAnyHovered] = useState(false)
 
-  const activeCategory = 'photography'
+  const activeCategory = 'all'
 
   const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory)
   const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1
