@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { Poppins } from 'next/font/google'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useTRPC } from '@/trpc/client'
 
 import NavBarSidebar from './nav-bar-sidebar'
 
@@ -44,6 +46,9 @@ const NavBar = () => {
   const pathname = usePathname()
   const [isSideBarOpen, setIsSideBarOpen] = useState(false)
 
+  const trpc = useTRPC()
+  const session = useQuery(trpc.auth.session.queryOptions())
+
   return (
     <nav className="h-20 flex border-b justify-between font-medium bg-white">
       <Link href="/" className="ml-6 flex items-center cursor-pointer">
@@ -58,30 +63,44 @@ const NavBar = () => {
         ))}
       </div>
 
-      <div className="hidden lg:flex">
-        <Button
-          asChild
-          className={cn(
-            'border-l border-r-0 border-y-0 rounded-none bg-white hover:bg-main transition-colors text-lg h-full px-12',
-          )}
-          variant="noShadow"
-        >
-          <Link prefetch href="/sign-in">
-            Login
-          </Link>
-        </Button>
-        <Button
-          asChild
-          className={cn(
-            'border-l border-r-0 border-y-0 rounded-none bg-white hover:bg-main transition-colors text-lg h-full px-12',
-          )}
-          variant="noShadow"
-        >
-          <Link prefetch href="/sign-up">
-            Start Selling
-          </Link>
-        </Button>
-      </div>
+      {session.data?.user ? (
+        <div className="hidden lg:flex">
+          <Button
+            asChild
+            className={cn(
+              'border-l border-r-0 border-y-0 rounded-none bg-white hover:bg-main transition-colors text-lg h-full px-12',
+            )}
+            variant="noShadow"
+          >
+            <Link href="/admin">Dashboard</Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="hidden lg:flex">
+          <Button
+            asChild
+            className={cn(
+              'border-l border-r-0 border-y-0 rounded-none bg-white hover:bg-main transition-colors text-lg h-full px-12',
+            )}
+            variant="noShadow"
+          >
+            <Link prefetch href="/sign-in">
+              Login
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className={cn(
+              'border-l border-r-0 border-y-0 rounded-none bg-white hover:bg-main transition-colors text-lg h-full px-12',
+            )}
+            variant="noShadow"
+          >
+            <Link prefetch href="/sign-up">
+              Start Selling
+            </Link>
+          </Button>
+        </div>
+      )}
 
       <NavBarSidebar items={navBarItems} open={isSideBarOpen} onOpenChange={setIsSideBarOpen} />
     </nav>

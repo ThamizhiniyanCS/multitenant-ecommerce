@@ -1,4 +1,5 @@
 'use client'
+
 import { Skeleton } from '@/components/ui/skeleton'
 
 import { useSuspenseQuery } from '@tanstack/react-query'
