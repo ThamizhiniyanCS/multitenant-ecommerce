@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'next/navigation'
 
 import { CategoriesGetManyOutput } from '@/modules/categories/types'
 
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const Categories = ({ data }: Props) => {
+  const params = useParams()
+
   const containerRef = useRef<HTMLDivElement>(null)
   const measureRef = useRef<HTMLDivElement>(null)
   const viewAllRef = useRef<HTMLDivElement>(null)
@@ -19,7 +22,8 @@ const Categories = ({ data }: Props) => {
   const [visibleCount, setVisibleCount] = useState(data.length)
   const [isAnyHovered, setIsAnyHovered] = useState(false)
 
-  const activeCategory = 'all'
+  const categoryParam = params.category as string | undefined
+  const activeCategory = categoryParam || 'all'
 
   const activeCategoryIndex = data.findIndex((cat) => cat.slug === activeCategory)
   const isActiveCategoryHidden = activeCategoryIndex >= visibleCount && activeCategoryIndex !== -1

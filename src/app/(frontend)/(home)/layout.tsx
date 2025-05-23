@@ -2,10 +2,10 @@ import React, { Suspense } from 'react'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 import { getQueryClient, trpc } from '@/trpc/server'
+import NavBar from '@/modules/home/ui/components/nav-bar'
+import Footer from '@/modules/home/ui/components/footer'
 
-import NavBar from './nav-bar'
-import Footer from './footer'
-import SearchFilters, { SearchFiltersSkeleton } from './search-filters'
+import SearchFilters, { SearchFiltersSkeleton } from '@/modules/home/ui/components/search-filters'
 
 export default async function HomeLayout({ children }: { children: React.ReactNode }) {
   const queryClient = getQueryClient()
