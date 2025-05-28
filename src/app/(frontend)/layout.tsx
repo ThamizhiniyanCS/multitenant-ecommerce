@@ -1,5 +1,6 @@
 import React from 'react'
 import { DM_Sans } from 'next/font/google'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import { cn } from '@/lib/utils'
 import { TRPCReactProvider } from '@/trpc/client'
@@ -21,10 +22,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body className={cn('antialiased scroll-smooth', dm_sans.className)}>
         <main>
-          <TRPCReactProvider>
-            {children}
-            <Toaster />
-          </TRPCReactProvider>
+          <NuqsAdapter>
+            <TRPCReactProvider>
+              {children}
+              <Toaster />
+            </TRPCReactProvider>
+          </NuqsAdapter>
         </main>
       </body>
     </html>
