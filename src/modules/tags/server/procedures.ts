@@ -1,4 +1,3 @@
-import type { Where } from 'payload'
 import { z } from 'zod'
 
 import { baseProcedure, createTRPCRouter } from '@/trpc/init'

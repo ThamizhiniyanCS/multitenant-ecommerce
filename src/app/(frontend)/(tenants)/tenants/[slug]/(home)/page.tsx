@@ -8,26 +8,28 @@ import ProductListView from '@/modules/products/ui/views/product-list-view'
 import { loadProductFilters } from '@/modules/products/search-params'
 
 interface Props {
-  params: Promise<{
-    category: string
-  }>
   searchParams: Promise<SearchParams>
+  params: Promise<{ slug: string }>
 }
 
-const CategoryPage = async ({ params, searchParams }: Props) => {
-  const { category } = await params
+const page = async ({ params, searchParams }: Props) => {
+  const { slug } = await params
   const filters = await loadProductFilters(searchParams)
 
   const queryClient = getQueryClient()
   void queryClient.prefetchInfiniteQuery(
-    trpc.products.getMany.infiniteQueryOptions({ ...filters, category, limit: DEFAULT_LIMIT }),
+    trpc.products.getMany.infiniteQueryOptions({
+      ...filters,
+      tenantSlug: slug,
+      limit: DEFAULT_LIMIT,
+    }),
   )
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProductListView category={category} />
+      <ProductListView tenantSlug={slug} narrowView />
     </HydrationBoundary>
   )
 }
 
-export default CategoryPage
+export default page
