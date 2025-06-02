@@ -21,6 +21,7 @@
     "@payloadcms/db-mongodb": "3.36.0",
     "@payloadcms/next": "3.36.0",
     "@payloadcms/payload-cloud": "3.36.0",
+    "@payloadcms/plugin-multi-tenant": "3.36.0",
     "@payloadcms/richtext-lexical": "3.36.0",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.11",
