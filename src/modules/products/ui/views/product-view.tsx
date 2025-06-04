@@ -7,12 +7,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { LinkIcon, StarIcon } from 'lucide-react'
 import { Fragment } from 'react'
+import dynamic from 'next/dynamic'
 
 import { useTRPC } from '@/trpc/client'
 import { formatCurrency, generateTenantURL } from '@/lib/utils'
 import StarRating from '@/components/star-rating'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+
+const CartButton = dynamic(() => import('../components/cart-button').then((mod) => mod.default), {
+  ssr: false,
+  loading: () => (
+    <Button className="flex-1 bg-pink-400" disabled>
+      Add to cart
+    </Button>
+  ),
+})
 
 interface Props {
   productId: string
@@ -91,7 +101,7 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
             <div className="border-t lg:border-t-0 lg:border-l h-full">
               <div className="flex flex-col gap-4 p-6 border-b">
                 <div className="flex flex-row items-center gap-4">
-                  <Button className="flex-1 bg-pink-400 cursor-pointer">Add to cart</Button>
+                  <CartButton tenantSlug={tenantSlug} productId={productId} />
 
                   <Button
                     className="cursor-pointer"
