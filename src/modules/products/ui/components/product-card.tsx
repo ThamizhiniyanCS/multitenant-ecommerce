@@ -1,7 +1,5 @@
 'use client'
 
-// TODO: Add real ratings
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'

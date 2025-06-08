@@ -265,7 +265,7 @@ export interface Tag {
 export interface Review {
   id: string;
   description: string;
-  rating?: number | null;
+  rating: number;
   product: string | Product;
   user: string | User;
   updatedAt: string;
