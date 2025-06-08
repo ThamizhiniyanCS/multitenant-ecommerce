@@ -28,7 +28,7 @@ const SearchInput = ({ disabled }: Props) => {
 
       {session.data?.user && (
         <Button variant="reverse" className="bg-transparent" asChild>
-          <Link href="/library">
+          <Link prefetch href="/library">
             <BookmarkCheckIcon />
             Library
           </Link>

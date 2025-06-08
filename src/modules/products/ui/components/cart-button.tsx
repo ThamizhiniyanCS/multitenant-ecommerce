@@ -1,14 +1,27 @@
+import Link from 'next/link'
+
 import { useCart } from '@/modules/checkout/hooks/use-cart'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface Props {
+  isPurchased?: boolean
   tenantSlug: string
   productId: string
 }
 
-const CartButton = ({ tenantSlug, productId }: Props) => {
+const CartButton = ({ isPurchased, tenantSlug, productId }: Props) => {
   const cart = useCart(tenantSlug)
+
+  if (isPurchased) {
+    return (
+      <Button className="flex-1 font-medium bg-white" asChild>
+        <Link prefetch href={`/library/${productId}`}>
+          View in Library
+        </Link>
+      </Button>
+    )
+  }
 
   return (
     <Button
