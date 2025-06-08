@@ -1,6 +1,6 @@
 'use client'
 
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { InboxIcon, LoaderIcon } from 'lucide-react'
@@ -20,6 +20,8 @@ interface Props {
 
 const CheckoutView = ({ tenantSlug }: Props) => {
   const router = useRouter()
+  const queryClient = useQueryClient()
+
   const [states, setStates] = useCheckoutStates()
   const { productIds, removeProduct, clearCart } = useCart(tenantSlug)
 
@@ -56,10 +58,10 @@ const CheckoutView = ({ tenantSlug }: Props) => {
     if (states.success) {
       setStates({ success: false, cancel: false })
       clearCart()
-      // TODO: Invalidate Library
-      router.push('/products')
+      queryClient.invalidateQueries(trpc.library.getMany.infiniteQueryFilter())
+      router.push('/library')
     }
-  }, [states.success, clearCart, router, setStates])
+  }, [states.success, clearCart, router, setStates, queryClient, trpc.library.getMany])
 
   useEffect(() => {
     if (error?.data?.code === 'NOT_FOUND') {
