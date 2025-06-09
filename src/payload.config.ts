@@ -29,6 +29,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      beforeNavLinks: ['@/components/stripe-verify'],
+    },
   },
   collections: [Users, Media, Orders, Categories, Products, Tags, Tenants, Reviews],
   editor: lexicalEditor(),
