@@ -1,8 +1,5 @@
 # Multitenant Ecommerce Application
 
-This template comes configured with the bare minimum to get started on anything
-you need.
-
 ## Quick start
 
 - Run the following command to start the development server
