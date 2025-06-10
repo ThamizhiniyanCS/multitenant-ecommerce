@@ -67,7 +67,7 @@ export const ProductViewSkeleton = () => {
   return (
     <div className="min-h-screen bg-white">
       <nav className="p-4 bg-[#F4F4F0] w-full border-b">
-        <div prefetch className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <ArrowLeftIcon className="size-4" />
           <span className="text font-medium">Back to Library</span>
         </div>

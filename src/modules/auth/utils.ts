@@ -1,7 +1,7 @@
 import { cookies as getCookies } from 'next/headers'
 
 interface Props {
-  prefix: String
+  prefix: string
   value: string
 }
 

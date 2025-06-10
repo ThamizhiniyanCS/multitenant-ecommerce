@@ -14,7 +14,6 @@ import StarPicker from '@/components/star-picker'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
