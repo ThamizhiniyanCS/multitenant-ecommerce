@@ -19,6 +19,7 @@
 - [Next.js 15](https://nextjs.org/)
 - [Payload CMS v3](https://payloadcms.com/)
 - [Tailwind CSS v4](https://tailwindcss.com/)
+- [Neobrutalism UI](https://www.neobrutalism.dev/)
 - [Zustand](https://zustand.docs.pmnd.rs/)
 - [Nuqs](https://nuqs.47ng.com/)
 
