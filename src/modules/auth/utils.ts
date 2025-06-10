@@ -13,8 +13,8 @@ export const generateAuthCookie = async ({ prefix, value }: Props) => {
     value,
     httpOnly: true,
     path: '/',
-    // TODO: Ensure cross-domain cookie sharing
-    // sameSite: "none",
-    // domain: ""
+    sameSite: 'none',
+    domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
+    secure: process.env.NODE_ENV === 'production',
   })
 }
